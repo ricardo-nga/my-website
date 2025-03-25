@@ -1,1 +1,1 @@
-Just my website
+Website
