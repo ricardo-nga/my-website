@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Theatre of life</title>
+   <!-- Import the font from Google Fonts -->
+   <link rel="preconnect" href="https://fonts.googleapis.com">
+   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+   <link href="https://fonts.googleapis.com/css2?family=Silkscreen:wght@400;700&display=swap" rel="stylesheet">
+   <style>
+       /* Apply the imported font to specific elements */
+       .silkscreen-bold {
+           font-family: "Silkscreen", sans-serif;
+           font-weight: 700;
+           font-style: normal;
+       }
+       .silkscreen-regular {
+           font-family: "Silkscreen", sans-serif;
+           font-weight: 400;
+           font-style: normal;
+       }
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        .dark-mode {
+            background-color: #222;
+            color: #f4f4f4;
+        }
+        header, footer {
+            background-color: #333;
+            color: #fff;
+            padding: 10px 0;
+            text-align: center;
+        }
+        .toggle-btn {
+            position: absolute;
+            right: 20px;
+            top: 10px;
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 18px;
+            cursor: pointer;
+        }
+        nav {
+            display: flex;
+            justify-content: center;
+            background-color: #444;
+        }
+        nav a {
+            color: #fff;
+            padding: 14px 20px;
+            text-decoration: none;
+            text-transform: uppercase;
+        }
+        nav a:hover {
+            background-color: #555;
+        }
+        section {
+            padding: 20px;
+            max-width: 800px;
+            margin: 20px auto;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .dark-mode section {
+            background-color: #333;
+        }
+        .gallery {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+        }
+        .gallery img {
+            max-width: 45%;
+            height: auto;
+        }
+        .pagination {
+            text-align: center;
+            margin: 20px;
+        }
+        .pagination button {
+            padding: 10px;
+            margin: 5px;
+            cursor: pointer;
+            border: none;
+            background-color: #444;
+            color: white;
+        }
+        .pagination button:disabled {
+            background-color: #777;
+            cursor: not-allowed;
+        }
+        /* Modal (popup) styling */
+        .modal {
+            display: none; /* Hide by default */
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            text-align: center;
+        }
+
+        .modal-content {
+            margin-top: 5%;
+            max-width: 90%;
+            max-height: 80vh;
+        }
+
+        .close {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            color: white;
+            font-size: 30px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+    </style>
+</head>
+<body>
+    <header>
+        <h1 class="silkscreen-bold">Theatre of life</h1>
+        <button class="toggle-btn" onclick="toggleMode()">◑</button>
+    </header>
+    <nav>
+        <a href="index.html" class="silkscreen-regular">About Me</a>
+        <a href="journal.html" class="silkscreen-regular">Journal</a>
+    </nav>
+    
+    <section>
+        <div class="gallery" id="photoGallery"></div>
+        <div class="pagination">
+            <button onclick="prevPage()" id="prevBtn">Previous</button>
+            <span id="pageNumber">1</span>
+            <button onclick="nextPage()" id="nextBtn">Next</button>
+        </div>
+    </section>
+        <div id="imageModal" class="modal">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <img class="modal-content" id="modalImage">
+        </div>
+    <footer>
+        <p>Photos by R. &copy; All rights reserved.</p>
+    </footer>
+    <script>
+        const photos = [
+            "Photos/tumblr_5a1c945280c178de44ea22b5d39556c4_7d283079_1280.jpg",
+            "Photos/tumblr_m1yjmq91UO1rt533ro1_640.jpg",
+            "Photos/tumblr_m1yjo81WKt1rt533ro1_640.jpg",
+            "Photos/tumblr_m1yjqar90v1rt533ro1_1280.jpg",
+            "Photos/tumblr_m1yjr7r0SI1rt533ro1_1280.jpg",
+            "Photos/tumblr_m1yjs37P891rt533ro1_640.jpg",
+            "Photos/tumblr_m1yjsqdKfX1rt533ro1_1280.jpg",
+            "Photos/tumblr_m1yjv0HqDj1rt533ro1_1280.jpg",
+            "Photos/tumblr_m1yjvvNzUN1rt533ro1_1280.jpg",
+            "Photos/tumblr_m1yjwsplS41rt533ro1_1280.jpg",
+            "Photos/tumblr_m1yjxfzRPw1rt533ro1_640.jpg",
+            "Photos/tumblr_m1yk0djzfD1rt533ro1_1280.jpg",
+            "Photos/tumblr_m1yk1rI61I1rt533ro1_1280.jpg",
+            "Photos/tumblr_m1yk2dNRES1rt533ro1_640.jpg",
+            "Photos/tumblr_m1yk3eRE441rt533ro1_1280.jpg",
+            "Photos/tumblr_m1yk3xfLY91rt533ro1_640.jpg",
+            "Photos/tumblr_m1yk4nRTTx1rt533ro1_1280.jpg",
+            "Photos/tumblr_m5l2lke2O81rt533ro1_1280.jpg",
+            "Photos/tumblr_m5pxqakNHg1rt533ro1_1280.jpg",
+            "Photos/tumblr_m5z8qfSuX31rt533ro1_1280.jpg",
+            "Photos/tumblr_m5z8tiKM3E1rt533ro1_1280.jpg",
+            "Photos/tumblr_macr0unDvD1rt533ro1_1280.jpg",
+            "Photos/tumblr_mbj6fc2oE41rt533ro1_1280.jpg",
+            "Photos/tumblr_mbj6g5FFCF1rt533ro1_1280.jpg",
+            "Photos/tumblr_mh2r2fwXNw1rt533ro1_1280.jpg",
+            "Photos/tumblr_mwjebj4qnP1rt533ro1_1280.jpg",
+            "Photos/tumblr_mwjecjqUSL1rt533ro1_1280.jpg",
+            "Photos/tumblr_mwjedlzLYl1rt533ro1_1280.jpg",
+            "Photos/tumblr_mwjeevpXD61rt533ro1_1280.jpg",
+            "Photos/tumblr_mwjehyhlrt1rt533ro1_1280.jpg",
+            "Photos/tumblr_mwjej7SgKE1rt533ro1_1280.jpg",
+            "Photos/tumblr_mwjeke1C1Z1rt533ro1_1280.jpg",
+            "Photos/tumblr_mwjelmm0IQ1rt533ro1_1280.jpg",
+            "Photos/tumblr_mwjemzxWDR1rt533ro1_1280.jpg",
+            "Photos/tumblr_mwjeo2i0701rt533ro1_1280.jpg",
+            "Photos/tumblr_mwjep1FP7Q1rt533ro1_1280.jpg",
+            "Photos/tumblr_mwjeqbLbaT1rt533ro1_1280.jpg",
+            "Photos/tumblr_mwjere4e511rt533ro1_1280.jpg",
+            "Photos/tumblr_mwjesky74m1rt533ro1_1280.jpg",
+            "Photos/tumblr_nkslw4AO7i1rt533ro1_1280.jpg",
+            "Photos/tumblr_nkslwiOlbM1rt533ro1_1280.jpg",
+            "Photos/tumblr_nl4jfkxKTt1rt533ro1_1280.jpg",
+            "Photos/tumblr_nl4jh4vV7w1rt533ro1_1280.jpg",
+            "Photos/tumblr_nl5ziap2b21rt533ro1_1280.jpg",
+            "Photos/tumblr_nlrycyPU6Q1rt533ro1_1280.jpg",
+            "Photos/tumblr_nlryddmnli1rt533ro1_1280.jpg",
+            "Photos/tumblr_nlrye0pgNf1rt533ro1_1280.jpg",
+            "Photos/tumblr_ntennby7kg1rt533ro1_1280.jpg",
+            "Photos/tumblr_ntennsIgsF1rt533ro1_1280.jpg",
+            "Photos/tumblr_nteno5jpUF1rt533ro1_1280.jpg",
+            "Photos/tumblr_nteo1fwqg41rt533ro1_1280.jpg",
+            "Photos/tumblr_nteo3mx5kV1rt533ro1_1280.jpg",
+            "Photos/tumblr_nteo3yCyGF1rt533ro1_1280.jpg",
+            "Photos/tumblr_nteo4ct7iQ1rt533ro1_1280.jpg",
+            "Photos/tumblr_nteo4ndbxj1rt533ro1_1280.jpg",
+            "Photos/tumblr_nz47f9qgLE1rt533ro1_1280.jpg",
+            "Photos/tumblr_nz47fyhAe51rt533ro1_1280.jpg",
+            "Photos/tumblr_nz47htddXd1rt533ro1_1280.jpg",
+            "Photos/tumblr_nz47idFyUT1rt533ro1_1280.jpg",
+            "Photos/tumblr_otevlfUGRi1rt533ro1_1280.jpg",
+            "Photos/tumblr_otevlsGCht1rt533ro1_1280.jpg",
+            "Photos/tumblr_otevm4PsGf1rt533ro1_1280.jpg",
+            "Photos/tumblr_otevmkSAvP1rt533ro1_1280.jpg",
+            "Photos/tumblr_otevmzOkWh1rt533ro1_1280.jpg",
+            "Photos/tumblr_otevnjYBLA1rt533ro1_1280.jpg",
+            "Photos/tumblr_otevo4LbOO1rt533ro1_1280.jpg",
+            "Photos/tumblr_otevokJjxk1rt533ro1_1280.jpg",
+            "Photos/tumblr_otevp1rWI81rt533ro1_1280.jpg",
+            "Photos/tumblr_otevpfaiUz1rt533ro1_1280.jpg",
+            "Photos/tumblr_otevpufnS21rt533ro1_1280.jpg",
+            "Photos/tumblr_ox4hah8Avm1rt533ro1_1280.jpg",
+            "Photos/tumblr_p2sbdgtscm1rt533ro1_1280.jpg",
+            "Photos/tumblr_p2sbe07l081rt533ro1_1280.jpg",
+            "Photos/tumblr_p2sbelurea1rt533ro1_1280.jpg",
+            "Photos/tumblr_potzs37iSr1rt533ro1_1280.jpg",
+            "Photos/tumblr_potzvyxBQT1rt533ro1_1280.jpg",
+            "Photos/tumblr_potzx56FjO1rt533ro1_1280.jpg",
+            "Photos/tumblr_potzz63JVV1rt533ro2_1280.jpg",
+            "Photos/tumblr_pou013Zhqr1rt533ro1_1280.jpg"
+        ];
+        const itemsPerPage = 4;
+        let currentPage = 1;
+
+        function renderGallery() {
+            const gallery = document.getElementById("photoGallery");
+            gallery.innerHTML = "";
+            const start = (currentPage - 1) * itemsPerPage;
+            const end = start + itemsPerPage;
+            const paginatedPhotos = photos.slice(start, end);
+
+            paginatedPhotos.forEach(src => {
+                const img = document.createElement("img");
+                img.src = src;
+                img.onclick = function() { openModal(src); };
+                gallery.appendChild(img);
+            });
+
+            document.getElementById("pageNumber").textContent = currentPage;
+            document.getElementById("prevBtn").disabled = currentPage === 1;
+            document.getElementById("nextBtn").disabled = end >= photos.length;
+        }
+
+        function nextPage() {
+            if ((currentPage * itemsPerPage) < photos.length) {
+                currentPage++;
+                renderGallery();
+            }
+        }
+        
+        function prevPage() {
+            if (currentPage > 1) {
+                currentPage--;
+                renderGallery();
+            }
+        }
+        function toggleMode() {
+            document.body.classList.toggle('dark-mode');
+            const isDarkMode = document.body.classList.contains('dark-mode');
+            localStorage.setItem('darkMode', isDarkMode);
+        }
+        
+       
+        // Function to open the modal with a clicked image
+        function openModal(src) {
+            document.getElementById("modalImage").src = src;
+            document.getElementById("imageModal").style.display = "block";
+        }
+
+        // Function to close the modal
+        function closeModal() {
+            document.getElementById("imageModal").style.display = "none";
+        }
+
+        window.onload = function() {
+            if (localStorage.getItem('darkMode') === 'true') {
+                document.body.classList.add('dark-mode');
+            }
+            renderGallery();
+        };
+    </script>
+</body>
+</html>
