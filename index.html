@@ -32,13 +32,39 @@
             background-color: #222;
             color: #f4f4f4;
         }
-        header, footer {
+        header {
             background-color: #333;
             color: #fff;
             padding: 10px 0;
             text-align: center;
             position: relative;
         }
+       footer {
+            background-color: #333;
+            color: #fff;
+            padding: 10px 0;
+        }
+
+        .footer-container {
+            display: flex;
+            justify-content: center;   /* centers the copyright */
+            align-items: center;
+            position: relative;        /* allows positioning of the icon */
+        }
+
+        .footer-center {
+            margin: 0;
+            text-align: center;
+            flex: 1;                   /* ensures it stays centered */
+        }
+
+        .footer-email {
+            position: absolute;
+            right: 20px;               /* space from the right edge */
+            font-size: 18px;
+            color: #fff;
+            text-decoration: none;
+}
         .toggle-btn {
             position: absolute;
             right: 20px;
@@ -126,7 +152,10 @@
     </section>
 
     <footer>
-        <p> <a href="mailto:ricardo.nga@proton.me" style="text-decoration: none; font-size:18px;"> &#128231; </a> &copy; All rights reserved.</p>
+        <div class="footer-container">
+            <p class="footer-center">&copy; All rights reserved.</p>
+            <a href="mailto:ricardo.nga@proton.me" class="footer-email">&#128231;</a>
+        </div>
     </footer>
 
     <script>
@@ -144,5 +173,6 @@
     </script>
 </body>
 </html>
+
 
 
