@@ -21,22 +21,26 @@
            font-style: normal;
        }
 
+       /* Base body */
        body {
            font-family: Arial, sans-serif;
            margin: 0;
            padding: 0;
            background-color: #f4f4f4;
            color: #333;
+           line-height: 1.6;
        }
        .dark-mode {
            background-color: #222;
            color: #f4f4f4;
        }
+
        header, footer {
            background-color: #333;
            color: #fff;
            padding: 10px 0;
            text-align: center;
+           position: relative;
        }
        .toggle-btn {
            position: absolute;
@@ -48,35 +52,46 @@
            font-size: 18px;
            cursor: pointer;
        }
+
        nav {
            display: flex;
            justify-content: center;
            background-color: #444;
+           flex-wrap: wrap;
        }
        nav a {
            color: #fff;
            padding: 14px 20px;
            text-decoration: none;
            text-transform: uppercase;
+           text-align: center;
        }
        nav a:hover {
            background-color: #555;
        }
+
        section {
            padding: 20px;
            max-width: 800px;
            margin: 20px auto;
            background-color: #fff;
            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+           transition: background 0.3s;
+           word-wrap: break-word;
        }
        .dark-mode section {
            background-color: #333;
        }
 
+       /* Posts */
+       .post {
+           margin-bottom: 20px;
+       }
+
        /* Load More button */
        #loadMoreContainer {
            text-align: center;
-           margin: 30px 0;
+           margin: 30px 10px;
        }
        #loadMoreBtn {
            padding: 12px 24px;
@@ -86,6 +101,7 @@
            color: #fff;
            border: none;
            border-radius: 6px;
+           max-width: 90%;
        }
        #loadMoreBtn:hover {
            background-color: #666;
@@ -97,9 +113,35 @@
        .dark-mode #loadMoreBtn:hover {
            background-color: #aaa;
        }
-       .container {
-           height: auto;
-           overflow: visible;
+
+       /* Responsive text and layout */
+       @media (max-width: 768px) {
+           section {
+               margin: 15px;
+               padding: 15px;
+           }
+           nav a {
+               padding: 10px 12px;
+               font-size: 14px;
+           }
+           #loadMoreBtn {
+               font-size: 14px;
+               padding: 10px 20px;
+           }
+       }
+       @media (max-width: 480px) {
+           .toggle-btn {
+               font-size: 16px;
+               top: 5px;
+           }
+           nav a {
+               padding: 8px 10px;
+               font-size: 12px;
+           }
+           #loadMoreBtn {
+               font-size: 13px;
+               padding: 8px 16px;
+           }
        }
    </style>
 </head>
@@ -108,6 +150,7 @@
         <h1 class="silkscreen-bold">Theatre of life</h1>
         <button class="toggle-btn" onclick="toggleMode()">◑</button>
     </header>
+
     <nav>
         <a href="index.html" class="silkscreen-regular">Home</a>
         <a href="photography.html" class="silkscreen-regular">Photography</a>
@@ -116,12 +159,13 @@
     <!-- All posts -->
     <section class="post">
         <h3>Introductions are in order</h3>
-        <p>Hi, my name is <strong>Ricardo</strong> and I am a dude that was born in 1976-an analog boy who witnessed the world going digital. What once seemed like an amazing and exciting time now feels soulless.</p>
-        <p>Likes : The smell of the earth when it rains, cats and Brutalism Arquitecture</p>
+        <p>Hi, my name is <strong>Ricardo</strong> and I am a dude that was born in 1976—an analog boy who witnessed the world going digital. What once seemed like an amazing and exciting time now feels soulless.</p>
+        <p>Likes : The smell of the earth when it rains, cats and Brutalism Architecture</p>
         <p>I collect books and music.</p>
         <br>
         <p style="text-align: right;">[1528021712]</p>
     </section>
+
     <section class="post">
         <h3>Enshitification</h3>
         <p><strong>noun.</strong> the gradual degradation of an online platform or service's functionality, as part of a cycle in which the platform or service first offers benefits to users to attract them, then pursues more and more profits at the expense of users.</p>
@@ -143,7 +187,7 @@
     </section>
 
     <section class="post">
-        <p><i>"<strong>Nostalgia,</strong> thats why you’re here. A tourist in your own youth."</i> (cited in T2 Trainspotting)</p>
+        <p><i>"<strong>Nostalgia,</strong> that's why you’re here. A tourist in your own youth."</i> (cited in T2 Trainspotting)</p>
         <br>
         <p style="text-align: right;">[1538726400]</p>
     </section>
@@ -151,7 +195,7 @@
     <section class="post">
         <h3>In Search of What Remains Human</h3>
         <p>I am sickened by the stench of this age. Every breath feels heavy with rot, the slow decay of meaning, the quiet death of sincerity beneath a mountain of noise. We worship screens like shrines, kneeling before hollow idols of fame and vanity. Our laughter is rehearsed, our empathy conditional, our dreams sold back to us in pixelated fragments.</p> 
-        <p>The world parades its progress while bleeding from the soul, politicians lie in polished suits,influencers sell illusions wrapped in smiles, and the crowd applauds, too numb to care.We’ve forgotten silence, forgotten touch, forgotten truth. Even love feels transactional now, measured in likes, attention, and performance.</p> 
+        <p>The world parades its progress while bleeding from the soul, politicians lie in polished suits, influencers sell illusions wrapped in smiles, and the crowd applauds, too numb to care. We’ve forgotten silence, forgotten touch, forgotten truth. Even love feels transactional now, measured in likes, attention, and performance.</p> 
         <p>I look around and feel a sickness grow, a deep, unrelenting disgust for the emptiness that has become our daily ritual. Humanity has turned its heart to stone and painted it gold to hide the cracks (not to be confused with kintsugi).</p>
         <p><i><strong>To be continued</strong></i></p> 
         <br> 
@@ -176,7 +220,7 @@
     </div>
 
     <footer>
-        <p> &copy; All rights reserved.</p>
+        <p>&copy; All rights reserved.</p>
     </footer>
 
     <script>
@@ -192,7 +236,6 @@
 
         function showPosts() {
             const posts = document.querySelectorAll(".post");
-
             posts.forEach((post, index) => {
                 post.style.display = index < visiblePosts ? "" : "none";
             });
@@ -218,14 +261,3 @@
     </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
