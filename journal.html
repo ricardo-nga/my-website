@@ -9,7 +9,7 @@
    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
    <link href="https://fonts.googleapis.com/css2?family=Silkscreen:wght@400;700&display=swap" rel="stylesheet">
    <style>
-       /* Apply the imported font to specific elements */
+       /* Silkscreen fonts */
        .silkscreen-bold {
            font-family: "Silkscreen", sans-serif;
            font-weight: 700;
@@ -20,58 +20,84 @@
            font-weight: 400;
            font-style: normal;
        }
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f4f4f4;
-            color: #333;
-        }
-        .dark-mode {
-            background-color: #222;
-            color: #f4f4f4;
-        }
-        header, footer {
-            background-color: #333;
-            color: #fff;
-            padding: 10px 0;
-            text-align: center;
-        }
-        .toggle-btn {
-            position: absolute;
-            right: 20px;
-            top: 10px;
-            background: none;
-            border: none;
-            color: #fff;
-            font-size: 18px;
-            cursor: pointer;
-        }
-        nav {
-            display: flex;
-            justify-content: center;
-            background-color: #444;
-        }
-        nav a {
-            color: #fff;
-            padding: 14px 20px;
-            text-decoration: none;
-            text-transform: uppercase;
-        }
-        nav a:hover {
-            background-color: #555;
-        }
-        section {
-            padding: 20px;
-            max-width: 800px;
-            margin: 20px auto;
-            background-color: #fff;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-        .dark-mode section {
-            background-color: #333;
-        }
-    </style>
+
+       body {
+           font-family: Arial, sans-serif;
+           margin: 0;
+           padding: 0;
+           background-color: #f4f4f4;
+           color: #333;
+       }
+       .dark-mode {
+           background-color: #222;
+           color: #f4f4f4;
+       }
+       header, footer {
+           background-color: #333;
+           color: #fff;
+           padding: 10px 0;
+           text-align: center;
+       }
+       .toggle-btn {
+           position: absolute;
+           right: 20px;
+           top: 10px;
+           background: none;
+           border: none;
+           color: #fff;
+           font-size: 18px;
+           cursor: pointer;
+       }
+       nav {
+           display: flex;
+           justify-content: center;
+           background-color: #444;
+       }
+       nav a {
+           color: #fff;
+           padding: 14px 20px;
+           text-decoration: none;
+           text-transform: uppercase;
+       }
+       nav a:hover {
+           background-color: #555;
+       }
+       section {
+           padding: 20px;
+           max-width: 800px;
+           margin: 20px auto;
+           background-color: #fff;
+           box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+       }
+       .dark-mode section {
+           background-color: #333;
+       }
+
+       /* Load More button */
+       #loadMoreContainer {
+           text-align: center;
+           margin: 30px 0;
+       }
+       #loadMoreBtn {
+           padding: 12px 24px;
+           font-size: 15px;
+           cursor: pointer;
+           background-color: #444;
+           color: #fff;
+           border: none;
+           border-radius: 6px;
+       }
+       #loadMoreBtn:hover {
+           background-color: #666;
+       }
+       .dark-mode #loadMoreBtn {
+           background-color: #888;
+           color: #000;
+       }
+       .dark-mode #loadMoreBtn:hover {
+           background-color: #aaa;
+       }
+   </style>
 </head>
 <body>
     <header>
@@ -82,7 +108,9 @@
         <a href="index.html" class="silkscreen-regular">Home</a>
         <a href="photography.html" class="silkscreen-regular">Photography</a>
     </nav>
-    <section>
+
+    <!-- All posts -->
+    <section class="post">
         <h3>Introductions are in order</h3>
         <p>Hi, my name is <strong>Ricardo</strong> and I am a dude that was born in 1976-an analog boy who witnessed the world going digital. What once seemed like an amazing and exciting time now feels soulless.</p>
         <p>Likes : The smell of the earth when it rains, cats and Brutalism Arquitecture</p>
@@ -90,83 +118,97 @@
         <br>
         <p style="text-align: right;">[1528021712]</p>
     </section>
-    <section>
+
+    <section class="post">
         <h3>Enshitification</h3>
         <p><strong>noun.</strong> the gradual degradation of an online platform or service's functionality, as part of a cycle in which the platform or service first offers benefits to users to attract them, then pursues more and more profits at the expense of users.</p>
         <br>
         <p style="text-align: right;">[1531792128]</p>
     </section>
-    <section>
+
+    <section class="post">
         <h3>On the Phenomenology of the Unsaid</h3>
-        <p>There is a peculiar delight in wandering the contours of a thought that refuses to crystallise. It is not quite an idea, nor is it a void; rather, it is the whisper between the two, like the trace of a footprint on a wind-swept beach just before the tide comes to claim it. We find ourselves speaking of things that never existed, yet insist on their presence like shadows at noon—obviously absent, but never quite gone.</p>
-        <p>Let us consider, for instance, the colour of silence. It is not white, though many might claim it so; white suggests clarity, and silence rarely offers that. Nor is it black—black speaks of ends, of completions, of answers buried. Silence is perhaps the hue of fog—ambiguous, mutable, not quite here and never fully there. In this way, the colour of silence becomes the mood of the in-between, of the overlooked, of the gently forgotten.</p>
-        <p>In much the same way, we might ponder the architecture of waiting. Waiting, after all, builds nothing and yet constructs everything. It erects invisible scaffolds of time, where thoughts climb ladders that lean only on possibility. A room filled with waiting becomes heavy with clocks that do not tick, calendars that refuse to turn, doors that open into themselves. It is a structure without form, and yet we all live within it more often than we’d like to admit.</p>
-        <p>Even language conspires in this theatre of almost-something. Words tremble on the edge of meaning, forming sentences that spiral elegantly without ever arriving. You see, there is nothing here that demands comprehension, yet everything insists on being felt. The act of reading these lines is akin to chasing smoke through a forest of mirrors—at once purposeful and entirely absurd.</p>
-        <p>And what of absurdity? It is the most honest companion to the nothing we discuss. Absurdity nods politely to meaning, but never quite bows to it. It smiles, half-drunk, at the universe and hums tunelessly through cosmic waiting rooms. It is not cynical, nor mocking—it simply is. As are we, in this moment, reflecting on reflections of reflections.</p>
-        <p>So we arrive—inevitably and without warning—at the conclusion that does not conclude. Nothing was promised, and everything was suggested. Like a dream you forgot before waking or a joke you never understood but laughed at anyway. In the end, this page has said nothing, and yet, you have read it all the same.</p>
+        <p>There is a peculiar delight in wandering the contours of a thought that refuses to crystallise. It is not quite an idea, nor is it a void; rather, it is the whisper between the two...</p>
+        <p>Even language conspires in this theatre of almost-something. Words tremble on the edge of meaning...</p>
         <p>And that, perhaps, is something.</p>
         <br>
         <p style="text-align: right;">[1532840427]</p>
     </section>
-    <section>
+
+    <section class="post">
         <p><i>"<strong>Nostalgia,</strong> thats why you’re here. A tourist in your own youth."</i> (cited in T2 Trainspotting)</p>
         <br>
         <p style="text-align: right;">[1538726400]</p>
     </section>
 
-    <section>
+    <section class="post">
         <h3>In Search of What Remains Human</h3>
-        <p>I am sickened by the stench of this age. Every breath feels heavy with rot, the slow decay of meaning, the quiet death of sincerity beneath a mountain of noise. We worship screens like shrines, kneeling before hollow idols of fame and vanity. Our laughter is rehearsed, our empathy conditional, our dreams sold back to us in pixelated fragments.</p>
-        <p>The world parades its progress while bleeding from the soul, politicians lie in polished suits,influencers sell illusions wrapped in smiles, and the crowd applauds, too numb to care.We’ve forgotten silence, forgotten touch, forgotten truth. Even love feels transactional now, measured in likes, attention, and performance.</p>
-        <p>I look around and feel a sickness grow, a deep, unrelenting disgust for the emptiness that has become our daily ritual. Humanity has turned its heart to stone and painted it gold to hide the cracks (not to be confused with kintsugi).</p>
+        <p>I am sickened by the stench of this age...</p>
         <p><i><strong>To be continued</strong></i></p>
         <br>
         <p style="text-align: right;">[1544558953]</p>
     </section>  
-    
-    <section>
+
+    <section class="post">
         <p>"It is through the denial of the will that we recognize the suffering within ourselves.” <strong>Arthur Schopenhauer</strong></p>
         <br>
         <p style="text-align: right;">[1546013746]</p>
     </section>
 
-        <section>
+    <section class="post">
         <p>“When the power of love overcomes the love of power, the world will know peace.”<strong>Jimmy Hendrix</strong></p> 
         <br>    
         <p style="text-align: right;">[1547830800]</p>
     </section>
-</body>
+
+    <!-- Load More Button -->
+    <div id="loadMoreContainer">
+        <button id="loadMoreBtn">Load More</button>
+    </div>
+
     <footer>
         <p> &copy; All rights reserved.</p>
     </footer>
+
     <script>
+        /* --------------------- DARK MODE --------------------- */
         function toggleMode() {
-            document.body.classList.toggle('dark-mode');
-            const isDarkMode = document.body.classList.contains('dark-mode');
-            localStorage.setItem('darkMode', isDarkMode);
+            document.body.classList.toggle("dark-mode");
+            localStorage.setItem("darkMode", document.body.classList.contains("dark-mode"));
         }
-        
-        window.onload = function() {
-            if (localStorage.getItem('darkMode') === 'true') {
-                document.body.classList.add('dark-mode');
+
+        /* --------------------- LOAD MORE --------------------- */
+        const postsPerLoad = 5;
+        let visiblePosts = 5;
+
+        function showPosts() {
+            const posts = document.querySelectorAll(".post");
+
+            posts.forEach((post, index) => {
+                post.style.display = index < visiblePosts ? "" : "none";
+            });
+
+            if (visiblePosts >= posts.length) {
+                document.getElementById("loadMoreBtn").style.display = "none";
             }
+        }
+
+        window.onload = function () {
+            if (localStorage.getItem("darkMode") === "true") {
+                document.body.classList.add("dark-mode");
+            }
+
+            showPosts();
+
+            document.getElementById("loadMoreBtn").addEventListener("click", () => {
+                visiblePosts += postsPerLoad;
+                showPosts();
+                window.scrollBy({ top: 400, behavior: "smooth" });
+            });
         };
     </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
