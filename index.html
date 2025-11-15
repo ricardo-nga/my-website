@@ -4,22 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Theatre of life</title>
-   <!-- Import the font from Google Fonts -->
-   <link rel="preconnect" href="https://fonts.googleapis.com">
-   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-   <link href="https://fonts.googleapis.com/css2?family=Silkscreen:wght@400;700&display=swap" rel="stylesheet">
-   <style>
-       /* Apply the imported font to specific elements */
-       .silkscreen-bold {
-           font-family: "Silkscreen", sans-serif;
-           font-weight: 700;
-           font-style: normal;
-       }
-       .silkscreen-regular {
-           font-family: "Silkscreen", sans-serif;
-           font-weight: 400;
-           font-style: normal;
-       }
+    <!-- Import Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Silkscreen:wght@400;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Font classes */
+        .silkscreen-bold {
+            font-family: "Silkscreen", sans-serif;
+            font-weight: 700;
+        }
+        .silkscreen-regular {
+            font-family: "Silkscreen", sans-serif;
+            font-weight: 400;
+        }
+
         body {
             font-family: Arial, sans-serif;
             margin: 0;
@@ -32,6 +32,7 @@
             background-color: #222;
             color: #f4f4f4;
         }
+
         header {
             background-color: #333;
             color: #fff;
@@ -39,32 +40,7 @@
             text-align: center;
             position: relative;
         }
-       footer {
-            background-color: #333;
-            color: #fff;
-            padding: 10px 0;
-        }
 
-        .footer-container {
-            display: flex;
-            justify-content: center;   /* centers the copyright */
-            align-items: center;
-            position: relative;        /* allows positioning of the icon */
-        }
-
-        .footer-center {
-            margin: 0;
-            text-align: center;
-            flex: 1;                   /* ensures it stays centered */
-        }
-
-        .footer-email {
-            position: absolute;
-            right: 20px;               /* space from the right edge */
-            font-size: 18px;
-            color: #fff;
-            text-decoration: none;
-}
         .toggle-btn {
             position: absolute;
             right: 20px;
@@ -75,6 +51,7 @@
             font-size: 18px;
             cursor: pointer;
         }
+
         nav {
             display: flex;
             justify-content: center;
@@ -89,65 +66,111 @@
         nav a:hover {
             background-color: #555;
         }
+
         section {
             padding: 20px;
             max-width: 800px;
             margin: 20px auto;
             background-color: #fff;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
             transition: background 0.3s;
+            overflow: visible;
         }
         .dark-mode section {
             background-color: #333;
         }
-        /* New CSS for dividing into two columns with a gap */
+
+        /* Columns layout - desktop */
         .columns {
             display: flex;
             justify-content: space-between;
-            gap: 20px; /* Gap between the two columns */
+            gap: 20px; 
+            flex-wrap: wrap; /* Permite quebrar em telas pequenas */
         }
         .column {
             flex: 1;
+            min-width: 250px;
+        }
+
+        /* Responsivo: empilhar colunas em telas pequenas */
+        @media (max-width: 768px) {
+            .columns {
+                flex-direction: column;
+                gap: 15px;
+            }
+        }
+
+        /* Footer */
+        footer {
+            background-color: #333;
+            color: #fff;
+            padding: 10px 0;
+        }
+        .footer-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+        .footer-center {
+            margin: 0;
+            text-align: center;
+            flex: 1;
+        }
+        .footer-email {
+            position: absolute;
+            right: 20px;
+            font-size: 18px;
+            color: #fff;
+            text-decoration: none;
         }
     </style>
 </head>
+
 <body>
     <header>
         <h1 class="silkscreen-bold">Theatre of life</h1>
         <button class="toggle-btn" onclick="toggleMode()">◑</button>
     </header>
+
     <nav>
         <a href="journal.html" class="silkscreen-regular">Journal</a>
         <a href="photography.html" class="silkscreen-regular">Photography</a>
     </nav>
-    <!-- Main Section -->
+
+    <!-- Main Section: Intro + Reading & Listening -->
     <section>
-        <div style="display: flex; align-items: center; gap: 20px;">
+        <!-- Intro Text + Image -->
+        <div style="display: flex; align-items: center; gap: 20px; margin-bottom: 20px; flex-wrap: wrap;">
             <img src="Img/Ricgrey.jpg" alt="my mugshot" 
-                width="150" height="150" 
-                style="border-radius: 50%; object-fit: cover; aspect-ratio: 1/1;">
-            <p style="margin: 0;">Hello, on this website, you'll discover insights into my personal interests, reflections, and a collection of photos I've taken along the way. Feel free to explore!
-        </div>
-    </section>
-
-    <!-- Updated Section with Two Columns -->
-    <section class="columns">
-        <!-- Books Section (Left) -->
-        <div class="column">
-            <h4>...reading   &#128218;</h4>
-            <ul>
-                <li>Trading Game - Gary Stevenson</li>
-                <li><s>Orbital - Samantha Harvey</s> <span style="color: green;">&#10003;</span></li>
-                <li><s>Unknown Pleasures - Peter Hook</s> <span style="color: green;">&#10003;</span></li>
-            </ul>
+                 width="150" height="150" 
+                 style="border-radius: 50%; object-fit: cover; aspect-ratio: 1/1;">
+            <p style="margin: 0; flex: 1;">
+                Hello, on this website, you'll discover insights into my personal interests, reflections, and a collection of photos I've taken along the way. Feel free to explore!
+            </p>
         </div>
 
-        <!-- Music Section (Right) -->
-        <div class="column">
-            <h4>...listening   &#127911;</h4>
-            <ul>
-                <li>98.12.28 男達の別れ - Fishmans</li>
-            </ul>
+        <!-- Reading & Listening Two Columns -->
+        <div class="columns">
+            <!-- Listening Section (Left) -->
+            <div class="column">
+                <h4>...listening &#127911;</h4>
+                <ul>
+                    <li>98.12.28 男達の別れ - Fishmans</li>
+                    <!-- Mais músicas aqui -->
+                </ul>
+            </div>
+
+            <!-- Reading Section (Right) -->
+            <div class="column">
+                <h4>...reading &#128218;</h4>
+                <ul>
+                    <li>Trading Game - Gary Stevenson</li>
+                    <li><s>Orbital - Samantha Harvey</s> <span style="color: green;">&#10003;</span></li>
+                    <li><s>Unknown Pleasures - Peter Hook</s> <span style="color: green;">&#10003;</span></li>
+                    <!-- Mais livros aqui -->
+                </ul>
+            </div>
         </div>
     </section>
 
@@ -164,7 +187,7 @@
             const isDarkMode = document.body.classList.contains('dark-mode');
             localStorage.setItem('darkMode', isDarkMode);
         }
-        
+
         window.onload = function() {
             if (localStorage.getItem('darkMode') === 'true') {
                 document.body.classList.add('dark-mode');
@@ -173,7 +196,6 @@
     </script>
 </body>
 </html>
-
 
 
 
