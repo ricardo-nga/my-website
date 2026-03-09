@@ -127,24 +127,25 @@
             color: #fff;
             text-decoration: none;
         }
-        #lastfm-list {
-            list-style: none;
-            padding: 0;
-        }
+#lastfm-covers {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
 
-        .lastfm-track {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin-bottom: 8px;
-        }
+.cover-item {
+    width: 50px;
+    height: 50px;
+    image-rendering: pixelated;
+    border: 1px solid #333;
+    cursor: pointer;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
 
-        .lastfm-track img {
-            width: 40px;
-            height: 40px;
-            object-fit: cover;
-            border-radius: 4px;
-        }
+.cover-item:hover {
+    transform: scale(1.2);
+    box-shadow: 2px 2px 0px #000;
+}
         .book-item img {
             width: 45px;
             height: 70px;
@@ -178,14 +179,14 @@
         </div>
 
         <!-- Reading & Listening Two Columns (centralizadas) -->
-        <div class="columns">
-            <!-- Listening Section (Left) -->
-            <div class="column">
-                <h4>...listening &#127911;</h4>
-                <ul id="lastfm-list">
-                <li>Loading recent tracks...</li>
-                </ul>
-            </div>
+      <div class="column">
+    <h4>...listening &#127911;</h4>
+    <div class="retro-player">
+        <div id="lastfm-covers">
+            <!-- Album covers will go here -->
+        </div>
+    </div>
+</div>
 
             <!-- Reading Section (Right) -->
             <div class="column">
@@ -235,53 +236,53 @@
             if (localStorage.getItem('darkMode') === 'true') {
                 document.body.classList.add('dark-mode');
             }
-            loadLastFM();
+            loadLastFMCovers();
         };
-        async function loadLastFM() {
+async function loadLastFMCovers() {
 
-            const username = "rnga";
-            const apiKey = "70d2032cdf3e812c883566ec806400da";
+    const username = "YOUR_LASTFM_USERNAME";
+    const apiKey = "YOUR_API_KEY";
 
-            const url = `https://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user=${username}&api_key=${apiKey}&format=json&limit=7`;
+    const url = `https://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user=${username}&api_key=${apiKey}&format=json&limit=20`;
 
-            try {
+    try {
+        const res = await fetch(url);
+        const data = await res.json();
 
-                const response = await fetch(url);
-                const data = await response.json();
+        const container = document.getElementById("lastfm-covers");
+        container.innerHTML = "";
 
-                const list = document.getElementById("lastfm-list");
-                list.innerHTML = "";
+        const tracks = data.recenttracks.track;
+        const seen = new Set();
 
-                const tracks = data.recenttracks.track;
+        for (const track of tracks) {
+            const key = track.name + '|' + track.artist["#text"];
+            if (seen.has(key)) continue;
+            seen.add(key);
 
-                tracks.forEach(track => {
+            const img = document.createElement("img");
+            img.className = "cover-item";
 
-                const li = document.createElement("li");
-                li.className = "lastfm-track";
+            // Use album art or placeholder
+            img.src = track.image[1]["#text"] || "Img/music-placeholder.png";
 
-                const img = document.createElement("img");
-                img.src = track.image[1]["#text"]; // small album art
+            // Tooltip: song + album
+            img.title = `${track.name} — ${track.album["#text"] || "Unknown Album"}`;
 
-                const text = document.createElement("span");
-                text.textContent = `${track.name} - ${track.artist["#text"]}`;
+            container.appendChild(img);
 
-                li.appendChild(img);
-                li.appendChild(text);
-
-                list.appendChild(li);
-        });
-
-        } catch (err) {
-
-            document.getElementById("lastfm-list").innerHTML =
-            "<li>Unable to load music</li>";
-
+            if (seen.size >= 5) break; // show only 5 unique songs
         }
 
+    } catch {
+        document.getElementById("lastfm-covers").innerHTML =
+            "<p>music unavailable</p>";
     }
+}
     </script>
 </body>
 </html>
+
 
 
 
