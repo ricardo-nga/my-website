@@ -243,7 +243,7 @@ async function loadLastFMCovers() {
     const username = "rnga";
     const apiKey = "70d2032cdf3e812c883566ec806400da";
 
-    const url = `https://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user=${username}&api_key=${apiKey}&format=json&limit=7`;
+    const url = `https://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user=${username}&api_key=${apiKey}&format=json&limit=20`;
 
     try {
         const res = await fetch(url);
@@ -271,7 +271,7 @@ async function loadLastFMCovers() {
 
             container.appendChild(img);
 
-            if (seen.size >= 5) break; // show only 5 unique songs
+            if (seen.size >= 10) break; // show only 10 unique songs
         }
 
     } catch {
@@ -282,6 +282,7 @@ async function loadLastFMCovers() {
     </script>
 </body>
 </html>
+
 
 
 
