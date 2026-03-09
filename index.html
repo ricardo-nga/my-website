@@ -158,9 +158,8 @@
             <!-- Listening Section (Left) -->
             <div class="column">
                 <h4>...listening &#127911;</h4>
-                <ul>
-                    <li>Above - Mad Season</li>
-                    <!-- Mais músicas aqui -->
+                <ul id="lastfm-list">
+                <li>Loading recent tracks...</li>
                 </ul>
             </div>
 
@@ -197,9 +196,43 @@
                 document.body.classList.add('dark-mode');
             }
         };
+        async function loadLastFM() {
+
+        const username = "rnga";
+        const apiKey = "70d2032cdf3e812c883566ec806400da";
+
+        const url = `https://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user=${username}&api_key=${apiKey}&format=json&limit=5`;
+
+        try {
+
+            const response = await fetch(url);
+            const data = await response.json();
+
+            const list = document.getElementById("lastfm-list");
+            list.innerHTML = "";
+
+            const tracks = data.recenttracks.track;
+
+            tracks.forEach(track => {
+
+            const li = document.createElement("li");
+            li.textContent = `${track.name} - ${track.artist["#text"]}`;
+            list.appendChild(li);
+
+        });
+
+        } catch (err) {
+
+            document.getElementById("lastfm-list").innerHTML =
+            "<li>Unable to load music</li>";
+
+        }
+
+    }
     </script>
 </body>
 </html>
+
 
 
 
