@@ -127,25 +127,25 @@
             color: #fff;
             text-decoration: none;
         }
-#lastfm-covers {
-    display: flex;
-    gap: 8px;
-    flex-wrap: wrap;
-}
+        #lastfm-covers {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
 
-.cover-item {
-    width: 50px;
-    height: 50px;
-    image-rendering: pixelated;
-    border: 1px solid #333;
-    cursor: pointer;
-    transition: transform 0.15s ease, box-shadow 0.15s ease;
-}
+        .cover-item {
+            width: 50px;
+            height: 50px;
+            image-rendering: pixelated;
+            border: 1px solid #333;
+            cursor: pointer;
+            transition: transform 0.15s ease, box-shadow 0.15s ease;
+        }
 
-.cover-item:hover {
-    transform: scale(1.2);
-    box-shadow: 2px 2px 0px #000;
-}
+        .cover-item:hover {
+            transform: scale(1.2);
+            box-shadow: 2px 2px 0px #000;
+        }
         .book-item img {
             width: 45px;
             height: 70px;
@@ -231,50 +231,50 @@
             }
             loadLastFMCovers();
         };
-async function loadLastFMCovers() {
+        async function loadLastFMCovers() {
 
-    const username = "rnga";
-    const apiKey = "70d2032cdf3e812c883566ec806400da";
+            const username = "rnga";
+            const apiKey = "70d2032cdf3e812c883566ec806400da";
 
-    const url = `https://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user=${username}&api_key=${apiKey}&format=json&limit=20`;
+            const url = `https://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user=${username}&api_key=${apiKey}&format=json&limit=20`;
 
-    try {
-        const res = await fetch(url);
-        const data = await res.json();
+            try {
+                const res = await fetch(url);
+                const data = await res.json();
 
-        const container = document.getElementById("lastfm-covers");
-        container.innerHTML = "";
+                const container = document.getElementById("lastfm-covers");
+                container.innerHTML = "";
 
-        const tracks = data.recenttracks.track;
-        const seen = new Set();
+                const tracks = data.recenttracks.track;
+                const seen = new Set();
 
-        for (const track of tracks) {
-            const key = track.name + '|' + track.artist["#text"];
-            if (seen.has(key)) continue;
-            seen.add(key);
+                for (const track of tracks) {
+                    const key = track.name + '|' + track.artist["#text"];
+                    if (seen.has(key)) continue;
+                        seen.add(key);
+                        const img = document.createElement("img");
+                        img.className = "cover-item";
 
-            const img = document.createElement("img");
-            img.className = "cover-item";
+                        // Use album art or placeholder
+                        img.src = track.image[1]["#text"] || "Img/music-placeholder.png";
 
-            // Use album art or placeholder
-            img.src = track.image[1]["#text"] || "Img/music-placeholder.png";
+                        // Tooltip: song + album
+                        img.title = `${track.name} — ${track.album["#text"] || "Unknown Album"}`;
 
-            // Tooltip: song + album
-            img.title = `${track.name} — ${track.album["#text"] || "Unknown Album"}`;
+                        container.appendChild(img);
 
-            container.appendChild(img);
+                    if (seen.size >= 10) break; // show only 10 unique songs
+                }
 
-            if (seen.size >= 10) break; // show only 10 unique songs
-        }
-
-    } catch {
-        document.getElementById("lastfm-covers").innerHTML =
-            "<p>music unavailable</p>";
+            } catch {
+                document.getElementById("lastfm-covers").innerHTML =
+                "<p>music unavailable</p>";
+                    }
     }
-}
     </script>
 </body>
 </html>
+
 
 
 
