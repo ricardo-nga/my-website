@@ -293,7 +293,7 @@
                         img.src = track.image[1]["#text"] || "Img/music-placeholder.png";
 
                         // Tooltip: song + album
-                        img.title = `${track.name} — ${track.album["#text"] || "Unknown Album"}`;
+                        img.title = `${track.name} — ${track.artist["#text"] || "Unknown Album"}`;
 
                         container.appendChild(img);
 
@@ -332,6 +332,7 @@
     </script>
 </body>
 </html>
+
 
 
 
