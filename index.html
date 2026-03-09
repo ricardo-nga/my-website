@@ -145,6 +145,29 @@
             object-fit: cover;
             border-radius: 4px;
         }
+        .bookshelf {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-top: 10px;
+        }
+
+        .book-item img {
+            width: 40px;
+            height: 60px;
+            object-fit: cover;
+            border: 1px solid #333;
+            transition: transform 0.15s ease;
+        }
+
+        .book-item img:hover {
+            transform: translateY(-4px) scale(1.1);
+            box-shadow: 2px 2px 0px #000;
+        }
+
+        .dark-mode .book-item img {
+            border-color: #aaa;
+        }
     </style>
 </head>
 
@@ -184,13 +207,26 @@
             <!-- Reading Section (Right) -->
             <div class="column">
                 <h4>...reading &#128218;</h4>
-                <ul>
-                    <li>Sacred and terrible air - Robert Kurvitz</li>
-                    <li>Farenheit 451 - Ray Bradbury</li>
-                    <li>Faith, Hope and Carnage - Nick Cave and Sean O'Hagan</li>
-                    <li><s>Trading Game - Gary Stevenson</s> <span style="color: green;">&#10003;</span></li>
-                    <!-- Mais livros aqui -->
-                </ul>
+
+            <div class="bookshelf">
+
+                <a href="#" class="book-item" title="Sacred and Terrible Air — Robert Kurvitz">
+                <img src="https://covers.openlibrary.org/b/title/Sacred%20and%20Terrible%20Air-M.jpg">
+                </a>
+
+                <a href="#" class="book-item" title="Fahrenheit 451 — Ray Bradbury">
+                <img src="https://covers.openlibrary.org/b/title/Fahrenheit%20451-M.jpg">
+                </a>
+
+                <a href="#" class="book-item" title="Faith, Hope and Carnage — Nick Cave">
+                <img src="https://covers.openlibrary.org/b/title/Faith%20Hope%20and%20Carnage-M.jpg">
+                </a>
+
+                <a href="#" class="book-item" title="Trading Game — Gary Stevenson">
+                <img src="https://covers.openlibrary.org/b/title/Trading%20Game-M.jpg">
+                </a>
+
+            </div>
             </div>
         </div>
     </section>
@@ -260,6 +296,7 @@
     </script>
 </body>
 </html>
+
 
 
 
