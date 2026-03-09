@@ -217,27 +217,36 @@
         };
         async function loadLastFM() {
 
-        const username = "rnga";
-        const apiKey = "70d2032cdf3e812c883566ec806400da";
+            const username = "rnga";
+            const apiKey = "70d2032cdf3e812c883566ec806400da";
 
-        const url = `https://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user=${username}&api_key=${apiKey}&format=json&limit=7`;
+            const url = `https://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user=${username}&api_key=${apiKey}&format=json&limit=7`;
 
-        try {
+            try {
 
-            const response = await fetch(url);
-            const data = await response.json();
+                const response = await fetch(url);
+                const data = await response.json();
 
-            const list = document.getElementById("lastfm-list");
-            list.innerHTML = "";
+                const list = document.getElementById("lastfm-list");
+                list.innerHTML = "";
 
-            const tracks = data.recenttracks.track;
+                const tracks = data.recenttracks.track;
 
-            tracks.forEach(track => {
+                tracks.forEach(track => {
 
-            const li = document.createElement("li");
-            li.textContent = `${track.name} - ${track.artist["#text"]}`;
-            list.appendChild(li);
+                const li = document.createElement("li");
+                li.className = "lastfm-track";
 
+                const img = document.createElement("img");
+                img.src = track.image[1]["#text"]; // small album art
+
+                const text = document.createElement("span");
+                text.textContent = `${track.name} - ${track.artist["#text"]}`;
+
+                li.appendChild(img);
+                li.appendChild(text);
+
+                list.appendChild(li);
         });
 
         } catch (err) {
@@ -251,6 +260,7 @@
     </script>
 </body>
 </html>
+
 
 
 
