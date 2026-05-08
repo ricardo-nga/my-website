@@ -152,20 +152,7 @@
             object-fit: cover;
             border: 1px solid #333;
         }
-        /* Watching section posters */
-        .series-item img {
-            width: 60px;
-            height: 90px;
-            object-fit: cover;
-            border: 1px solid #333;
-            cursor: pointer;
-            transition: transform 0.15s ease, box-shadow 0.15s ease;
-        }
-
-        .series-item img:hover {
-            transform: scale(1.2);
-            box-shadow: 2px 2px 0px #000;
-        }
+        
     </style>
 </head>
 
@@ -224,17 +211,7 @@
 
                 </div>
             </div>
-            <!-- Watching Section -->
-        <div class="column">
-            <h4>...Watching &#127916;</h4>
-                <div class="series-shelf">
-                    <a class="series-item" title="The Sopranos">
-                    <img src="Img/sopranos.jpg" 
-                     onerror="this.onerror=null;this.src='./Img/series-placeholder.png';" 
-                     alt="The Sopranos Poster">
-                    </a>
-                </div>
-        </div>
+
     </section>
 
     <footer>
@@ -301,29 +278,7 @@
                     }
         }
        
-        // ===== New Series Section Script =====
         
-        const series = ["The Sopranos"];
-        const apiKey = "b66343856adf550ceb2325bb20189d7e";
-
-        async function loadSeries() {
-            const container = document.querySelector(".series-shelf");
-            container.innerHTML = "";
-
-                for (const title of series) {
-                    const res = await fetch(`https://api.themoviedb.org/3/search/tv?api_key=${apiKey}&query=${encodeURIComponent(title)}`);
-                    const data = await res.json();
-                    const poster = data.results[0]?.poster_path 
-                                   ? `https://image.tmdb.org/t/p/w200${data.results[0].poster_path}` 
-                                   : "Img/series-placeholder.png";
-
-                    const a = document.createElement("a");
-                    a.className = "series-item";
-                    a.title = title;
-                    a.innerHTML = `<img src="${poster}" alt="${title} Poster" onerror="this.src='Img/series-placeholder.png'">`;
-                    container.appendChild(a);
-                }
-        }
     </script>
 </body>
 </html>
